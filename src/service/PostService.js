@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8080/posts";
+const EMPLOYEE_API_BASE_URL = "https://jsonplaceholder.typicode.com/posts";
 
 class PostService{
     getPosts(){
