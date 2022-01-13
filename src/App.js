@@ -19,13 +19,15 @@ function App() {
     const [isPostLoading, setIsPostLoading] = useState(false)
 
     useEffect(() => {
-        setIsPostLoading(true)
-        PostService.getPosts().then((res) => {
-            setPosts(res.data)
-
-        })
-        setIsPostLoading(false)
+            fetchPosts()
     }, [])
+
+    async function fetchPosts(){
+        setIsPostLoading(true)
+        const posts = await PostService.getAllPosts()
+        setPosts(posts)
+        setIsPostLoading(false)
+    }
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -59,23 +61,12 @@ function App() {
                   filter={filter}
                   setFilter={setFilter}
                   />
-                  {isPostLoading
-                      ?
-                      <h1
-                          style={{textAlign: 'center'}}
-                      >
-                          Идет загрузка...
-                      </h1>
-                      :
-                      <PostList
-                          remove={deletePost}
-                          posts={sortedAndSearchedPosts}
-                          title={"Список постов"}
-                      />
-                  }
-
-
-
+              <PostList
+                  isPostLoading={isPostLoading}
+                  remove={deletePost}
+                  posts={sortedAndSearchedPosts}
+                  title={"Список постов"}
+              />
           </div>
       );
 }
