@@ -7,6 +7,7 @@ import MyModal from "./components/UI/modal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import {usePosts} from "./components/hooks/usePosts";
 import PostService from "./service/PostService";
+import {useFetching} from "./components/hooks/useFetching";
 
 
 function App() {
@@ -16,18 +17,14 @@ function App() {
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
-    const [isPostLoading, setIsPostLoading] = useState(false)
-
-    useEffect(() => {
-            fetchPosts()
-    }, [])
-
-    async function fetchPosts(){
-        setIsPostLoading(true)
+    const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
         const posts = await PostService.getAllPosts()
         setPosts(posts)
-        setIsPostLoading(false)
-    }
+    })
+
+    useEffect(() => {
+        fetchPosts()
+    }, [])
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -46,21 +43,30 @@ function App() {
               >
                   Создать пост
               </MyButton>
+
               <MyModal
                   visible={modal}
                   setVisible={setModal}
                   setPost={setPost}
               >
+
                   <PostForm
                       post={post}
                       setPost={setPost}
                       create={createPost}
                   />
+
               </MyModal>
+
               <PostFilter
                   filter={filter}
                   setFilter={setFilter}
-                  />
+              />
+
+              {postError &&
+                  <h1>Произошла ошибка ${postError}</h1>
+              }
+
               <PostList
                   isPostLoading={isPostLoading}
                   remove={deletePost}
