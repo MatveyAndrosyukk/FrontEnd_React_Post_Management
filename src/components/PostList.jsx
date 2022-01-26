@@ -3,15 +3,7 @@ import PostItem from "./PostItem";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 import Loader from "./UI/loader/Loader";
 
-const PostList = ({posts, title, remove, isPostLoading}) => {
-    if (isPostLoading){
-        return (
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Loader/>
-            </div>
-        )
-    }
-
+const PostList = ({posts, title, remove}) => {
     if (!posts.length){
         return (
             <h1 style={{textAlign: 'center'}}>
