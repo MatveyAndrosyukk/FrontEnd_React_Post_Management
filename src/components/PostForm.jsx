@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
 
-const PostForm = ({create}) => {
-    const [post, setPost] = useState({id: 0,title: '', body: ''})
-
+const PostForm = ({create, setVisible, post, setPost}) => {
     const addNewPost = (e) => {
         e.preventDefault()
         const newPost = {
@@ -12,6 +10,7 @@ const PostForm = ({create}) => {
         }
         create(newPost)
         setPost({id: 0, title: '', body: ''})
+        setVisible(false)
     }
 
     return (
