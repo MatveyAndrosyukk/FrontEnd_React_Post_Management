@@ -9,6 +9,7 @@ export const useObserve = (isPostLoading, expression, ref, callback) => {
         let cb = function (entries, observer){
             if (entries[0].isIntersecting && expression){
                 callback()
+                console.log(entries)
             }
         }
 

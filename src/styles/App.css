@@ -45,3 +45,14 @@
     opacity: 0;
     transition: opacity 500ms ease-in;
 }
+
+.navbar__changes {
+    width: 100vw;
+}
+
+.login-form-span{
+    margin-left: 184px;
+    display: flex;
+    color: grey;
+}
+

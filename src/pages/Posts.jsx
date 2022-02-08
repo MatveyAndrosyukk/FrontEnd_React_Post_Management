@@ -31,6 +31,7 @@ function Posts() {
 
     useEffect(() => {
         fetchPosts(limit, page)
+        document.title = "Post Service: All Posts"
     }, [page])
 
     useObserve(isPostLoading, page !== totalPages, lastElement, () => {
@@ -40,11 +41,15 @@ function Posts() {
 
 
     const createPost = (newPost) => {
-        setPosts([...posts, newPost])
+        PostService.addPost(newPost)
+        if (page === totalPages){
+            fetchPosts(-1)
+        }
 
     }
 
     const deletePost = (post) => {
+        PostService.deletePostById(post.id)
         setPosts(posts.filter(p => p.id !== post.id))
     }
 
