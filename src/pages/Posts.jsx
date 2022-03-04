@@ -43,7 +43,7 @@ function Posts() {
     const createPost = (newPost) => {
         PostService.addPost(newPost)
         if (page === totalPages){
-            fetchPosts(-1)
+            fetchPosts(-1, page)
         }
 
     }

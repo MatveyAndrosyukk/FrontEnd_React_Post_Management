@@ -9,7 +9,7 @@ const AppRoutes = () => {
     const {isAuth} = useContext(AppContext)
     const {areRoutesLoading} = useContext(AppContext)
 
-    if (!areRoutesLoading){
+    if (areRoutesLoading){
         return <Loader/>
     }else {
         return (

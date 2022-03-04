@@ -6,13 +6,13 @@ import {AppContext} from "./context/context";
 
 const App = () => {
     const [isAuth, setIsAuth] = useState(false)
-    const [areRoutesLoading, setAreRoutesLoading] = useState(false)
+    const [areRoutesLoading, setAreRoutesLoading] = useState(true)
 
     useEffect(() => {
         if (localStorage.getItem("auth")){
             setIsAuth(true)
         }
-        setAreRoutesLoading(true)
+        setAreRoutesLoading(false)
     }, [])
 
     return (

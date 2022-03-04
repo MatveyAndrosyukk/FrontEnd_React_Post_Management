@@ -39,7 +39,7 @@ export default class PostService{
     }
 
     static async deleteCommentByPostId(postId, commentId){
-        const response = await axios.put(POST_API_BASE_URL + "/" + postId + "/comments/delete/" + commentId)
+        const response = await axios.delete(POST_API_BASE_URL + "/" + postId + "/comments/delete/" + commentId)
         return response
     }
 }
